@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Complete - Discord Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #2f3136;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #b9bbbe;
+            font-size: 16px;
+        }
+
+        .key-container {
+            background: #202225;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid #6868FF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(104, 104, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .key-label {
+            color: #b9bbbe;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .key-display {
+            background: #18191c;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .key-text {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background: #6868FF;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #5454d4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(104, 104, 255, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: #00FF00;
+        }
+
+        .instructions {
+            background: #18191c;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .instructions h3 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .instruction-step {
+            color: #b9bbbe;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-number {
+            background: #6868FF;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #72767d;
+            font-size: 14px;
+        }
+
+        .error {
+            background: #E4000F;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .key-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="success-icon">✅</div>
+            <h1>Verification Complete!</h1>
+            <p class="subtitle">You've successfully completed all tasks</p>
+        </div>
+
+        <div id="content">
+            <div class="key-container">
+                <div class="key-label">Your Verification Key</div>
+                <div class="key-display">
+                    <span class="key-text" id="verificationKey">Loading...</span>
+                </div>
+                <button class="copy-btn" id="copyBtn" onclick="copyKey()">
+                    <span id="btnText">📋 Copy Key</span>
+                </button>
+            </div>
+
+            <div class="instructions">
+                <h3>Next Steps:</h3>
+                <div class="instruction-step">
+                    <div class="step-number">1</div>
+                    <span>Click the "Copy Key" button above</span>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">2</div>
+                    <span>Return to Discord and find your claim thread</span>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">3</div>
+                    <span>Click the "Submit Key" button</span>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">4</div>
+                    <span>Paste your verification key</span>
+                </div>
+            </div>
+
+            <a href="discord://" class="discord-btn">
+                🎮 Back to Discord
+            </a>
+
+            <div class="footer">
+                Key expires in 30 minutes • Keep this page open until submitted
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the key from URL parameter
+        function getKeyFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('key');
+        }
+
+        // Display the key
+        const key = getKeyFromURL();
+        const keyElement = document.getElementById('verificationKey');
+
+        if (key) {
+            keyElement.textContent = key;
+        } else {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <h2>❌ No Verification Key Found</h2>
+                    <p style="margin-top: 10px;">Please complete the verification tasks first.</p>
+                </div>
+            `;
+        }
+
+        // Copy key to clipboard
+        function copyKey() {
+            const key = document.getElementById('verificationKey').textContent;
+            const btn = document.getElementById('copyBtn');
+            const btnText = document.getElementById('btnText');
+
+            navigator.clipboard.writeText(key).then(() => {
+                // Change button to show success
+                btn.classList.add('copied');
+                btnText.textContent = '✅ Copied!';
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btnText.textContent = '📋 Copy Key';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please copy manually: ' + key);
+            });
+        }
+
+        // Log page load
+        console.log('Verification page loaded. Key:', key ? 'Present' : 'Missing');
+    </script>
+</body>
+</html>
